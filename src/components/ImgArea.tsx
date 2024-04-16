@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
 
+import useModal from "@hooks/useModal";
 import { Coordinate } from "@models/haja";
 import Marker from "./Marker";
 
@@ -20,7 +21,11 @@ const ImgArea = () => {
     localStorage.setItem("coordinates", JSON.stringify(coordinateList));
   }, [coordinateList]);
 
+  const modalAdd = useModal();
+
   const mouseClick = (e: any) => {
+    modalAdd.onOpen();
+
     const areaRect = areaRef?.current?.getBoundingClientRect();
 
     const newCoordinate = {
