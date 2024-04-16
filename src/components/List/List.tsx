@@ -6,6 +6,10 @@ const List = ({ haja }: { haja: HajaItem[] }) => {
       <h2>하자 목록</h2>
       {haja?.map((h, index) => (
         <div key={index}>
+          <span>
+            {index + 1}
+            {")"}
+          </span>
           <span>{h?.cate} : </span>
           <span>{h?.description}</span>
         </div>
