@@ -7,7 +7,7 @@ export interface HajaItem {
   uid: string;
   cate: string;
   description: string;
-  imgURL: string;
+  imgURL?: string;
   created_at: Date;
   updated_at: Date;
   coordinate: Coordinate;
