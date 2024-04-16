@@ -1,7 +1,8 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
-import { css } from "@emotion/react";
 import useModal from "@hooks/useModal";
 import Button from "@shared/Button";
 import Flex from "@shared/Flex";
@@ -46,13 +47,19 @@ const ModalAdd = ({ setHaja }: any) => {
       setValue(""),
       setSelectedCate(""),
     );
+
+    onClose();
   };
 
   const handleClose = () => {
     onClose();
   };
 
-  return (
+  const $portalRoot = document.getElementById("root-portal");
+
+  if (!$portalRoot) return null;
+
+  return createPortal(
     <>
       {isOpen && (
         <Container>
@@ -88,7 +95,8 @@ const ModalAdd = ({ setHaja }: any) => {
           </Flex>
         </Container>
       )}
-    </>
+    </>,
+    $portalRoot,
   );
 };
 
