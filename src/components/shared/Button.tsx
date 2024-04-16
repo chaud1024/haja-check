@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
-import React from "react";
 
-const Button = ({ title, onClick }) => {
+interface ButtonProps {
+  title: string;
+  disabled?: boolean;
+  onClick: (e: any) => void;
+}
+
+const Button = ({ title, onClick }: ButtonProps) => {
   return <Btn onClick={onClick}>{title}</Btn>;
 };
 
@@ -10,7 +15,7 @@ const Btn = styled.button`
   border-radius: 5px;
   border: 2px solid black;
   background-color: white;
-  pointer: cursor;
+  cursor: pointer;
 `;
 
 export default Button;

@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
-import React from "react";
 
-const Marker = ({ coordinate, number }) => {
+import { Coordinate } from "@models/haja";
+
+interface MarkerProps {
+  coordinate: Coordinate;
+  number: number;
+}
+
+const Marker = ({ coordinate, number }: MarkerProps) => {
   return (
     <MarkerDiv coordinate={coordinate}>
       <span>{number}</span>
@@ -9,7 +15,7 @@ const Marker = ({ coordinate, number }) => {
   );
 };
 
-const MarkerDiv = styled.div`
+const MarkerDiv = styled.div<{ coordinate: Coordinate }>`
   width: 16px;
   height: 16px;
   background-color: tomato;

@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
-import useModal from "../../hooks/useModal";
-import Button from "../shared/Button";
-import Flex from "../shared/Flex";
+import { useState } from "react";
 
-const AddItem = ({ setHaja }) => {
+import { css } from "@emotion/react";
+import useModal from "@hooks/useModal";
+import Button from "@shared/Button";
+import Flex from "@shared/Flex";
+
+const ModalAdd = ({ setHaja }: any) => {
   const [value, setValue] = useState("");
   const [selectedCate, setSelectedCate] = useState("");
   const { isOpen, onClose } = useModal();
@@ -23,15 +25,15 @@ const AddItem = ({ setHaja }) => {
     "욕실2",
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setValue(e.target.value);
   };
 
-  const handleCateChange = (e) => {
+  const handleCateChange = (e: any) => {
     setSelectedCate(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     const newHaja = {
@@ -39,7 +41,11 @@ const AddItem = ({ setHaja }) => {
       description: value,
     };
 
-    setHaja((prev) => [...prev, newHaja], setValue(""), setSelectedCate(""));
+    setHaja(
+      (prev: any) => [...prev, newHaja],
+      setValue(""),
+      setSelectedCate(""),
+    );
   };
 
   const handleClose = () => {
@@ -49,15 +55,17 @@ const AddItem = ({ setHaja }) => {
   return (
     <>
       {isOpen && (
-        <AddItemModal>
-          <Flex>
-            <h2 style={{ flexGrow: 1, textAlign: "center" }}>
-              하자내용 입력하기
-            </h2>
+        <Container>
+          <Flex
+            align="center"
+            position="relative"
+            justify="flex-end"
+            css={flexStyles}>
+            <h2 css={h2Styles}>하자내용 입력하기</h2>
             <Button title="닫기" onClick={handleClose} />
           </Flex>
 
-          <Flex>
+          <Flex css={flexStyles}>
             <Select
               name="cate"
               onChange={handleCateChange}
@@ -78,13 +86,13 @@ const AddItem = ({ setHaja }) => {
             />
             <Button title="저장" onClick={handleSubmit} />
           </Flex>
-        </AddItemModal>
+        </Container>
       )}
     </>
   );
 };
 
-const AddItemModal = styled.div`
+const Container = styled.div`
   width: min(600px, 90%);
   padding: 20px;
   border-radius: 10px;
@@ -98,6 +106,18 @@ const AddItemModal = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+`;
+
+const flexStyles = css`
+  width: 100%;
+  gap: 8px;
+`;
+
+const h2Styles = css`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const Select = styled.select`
@@ -114,4 +134,4 @@ const Input = styled.input`
   flex-grow: 1;
 `;
 
-export default AddItem;
+export default ModalAdd;

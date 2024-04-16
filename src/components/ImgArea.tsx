@@ -1,39 +1,43 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
+
+import { Coordinate } from "@models/haja";
 import Marker from "./Marker";
 
 const ImgArea = () => {
-  const [coordinate, setCoordinate] = useState({
+  const [coordinate, setCoordinate] = useState<Coordinate>({
     coordinateX: null,
     coordinateY: null,
   });
 
   const [coordinateList, setCoordinateList] = useState(
-    JSON.parse(localStorage.getItem("coordinates")) || [],
+    JSON.parse(localStorage.getItem("coordinates") as string) || [],
   );
 
-  const areaRef = useRef(null);
+  const areaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     localStorage.setItem("coordinates", JSON.stringify(coordinateList));
   }, [coordinateList]);
 
-  const mouseClick = (e) => {
-    const areaRect = areaRef.current.getBoundingClientRect();
+  const mouseClick = (e: any) => {
+    const areaRect = areaRef?.current?.getBoundingClientRect();
 
     const newCoordinate = {
-      coordinateX: ((e.clientX - areaRect.left) / areaRect.width) * 100,
-      coordinateY: ((e.clientY - areaRect.top) / areaRect.height) * 100,
+      coordinateX:
+        areaRect && ((e.clientX - areaRect.left) / areaRect.width) * 100,
+      coordinateY:
+        areaRect && ((e.clientY - areaRect.top) / areaRect.height) * 100,
     };
 
-    setCoordinate(newCoordinate);
+    setCoordinate(newCoordinate as Coordinate);
     setCoordinateList([...coordinateList, newCoordinate]);
   };
 
   return (
     <Area id="area" onClick={mouseClick} ref={areaRef}>
       <img src="./img.png" alt="" />
-      {coordinateList?.map((coordinate, index) => (
+      {coordinateList?.map((coordinate: Coordinate, index: number) => (
         <Marker
           key={index}
           coordinate={coordinate}

@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import AddItem from "../Modal/AddItem";
+import { HajaItem } from "@/models/haja";
 
-const List = () => {
-  const [haja, setHaja] = useState([]);
-
+const List = ({ haja }: { haja: HajaItem[] }) => {
   return (
     <div>
-      <AddItem setHaja={setHaja} />
       <h2>하자 목록</h2>
       {haja?.map((h, index) => (
         <div key={index}>
