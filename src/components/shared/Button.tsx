@@ -3,11 +3,15 @@ import styled from "@emotion/styled";
 interface ButtonProps {
   title: string;
   disabled?: boolean;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
 
-const Button = ({ title, onClick }: ButtonProps) => {
-  return <Btn onClick={onClick}>{title}</Btn>;
+const Button = ({ title, onClick, disabled }: ButtonProps) => {
+  return (
+    <Btn onClick={onClick} disabled={disabled}>
+      {title}
+    </Btn>
+  );
 };
 
 const Btn = styled.button`
