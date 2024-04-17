@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-import useModal from "@hooks/useModal";
+import useModal from "@/hooks/useModalAdd";
 import Button from "@shared/Button";
 import Flex from "@shared/Flex";
 
