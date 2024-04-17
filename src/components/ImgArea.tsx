@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
 
-import useModal from "@hooks/useModal";
+import useModalAdd from "@/hooks/useModalAdd";
 import { Coordinate } from "@models/haja";
 import Marker from "./Marker";
 
@@ -21,7 +21,7 @@ const ImgArea = () => {
     localStorage.setItem("coordinates", JSON.stringify(coordinateList));
   }, [coordinateList]);
 
-  const modalAdd = useModal();
+  const modalAdd = useModalAdd();
 
   const mouseClick = (e: any) => {
     modalAdd.onOpen();
@@ -58,6 +58,10 @@ const Area = styled.div`
   height: fit-content;
   position: relative;
   margin: 0 auto;
+
+  & img {
+    width: 100%;
+  }
 `;
 
 export default ImgArea;
