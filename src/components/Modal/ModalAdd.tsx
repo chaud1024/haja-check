@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
+import { cateIndex } from "@/constants/cateIndex";
 import useModal from "@/hooks/useModalAdd";
 import Button from "@shared/Button";
 import Flex from "@shared/Flex";
@@ -11,20 +12,6 @@ const ModalAdd = ({ setHaja }: any) => {
   const [value, setValue] = useState("");
   const [selectedCate, setSelectedCate] = useState("");
   const { isOpen, onClose } = useModal();
-
-  const cateList = [
-    "현관",
-    "거실",
-    "침실1",
-    "침실2",
-    "침실3",
-    "주방/식당",
-    "발코니1",
-    "발코니2",
-    "실외기실",
-    "욕실1",
-    "욕실2",
-  ];
 
   const handleChange = (e: any) => {
     setValue(e.target.value);
@@ -62,38 +49,41 @@ const ModalAdd = ({ setHaja }: any) => {
   return createPortal(
     <>
       {isOpen && (
-        <Container>
-          <Flex
-            align="center"
-            position="relative"
-            justify="flex-end"
-            css={flexStyles}>
-            <h2 css={h2Styles}>하자내용 입력하기</h2>
-            <Button title="닫기" onClick={handleClose} />
-          </Flex>
+        <>
+          <Container>
+            <Flex
+              align="center"
+              position="relative"
+              justify="flex-end"
+              css={flexStyles}>
+              <h2 css={h2Styles}>하자내용 입력하기</h2>
+              <Button title="닫기" onClick={handleClose} />
+            </Flex>
 
-          <Flex css={flexStyles}>
-            <Select
-              name="cate"
-              onChange={handleCateChange}
-              value={selectedCate}>
-              <option>위치 선택</option>
-              {cateList.map((cate) => (
-                <option key={cate} value={cate}>
-                  {cate}
-                </option>
-              ))}
-            </Select>
-            <Input
-              type="text"
-              name="description"
-              placeholder="내용작성"
-              value={value}
-              onChange={handleChange}
-            />
-            <Button title="저장" onClick={handleSubmit} />
-          </Flex>
-        </Container>
+            <Flex css={flexStyles}>
+              <Select
+                name="cate"
+                onChange={handleCateChange}
+                value={selectedCate}>
+                <option>위치 선택</option>
+                {cateIndex.map((cate) => (
+                  <option key={cate} value={cate}>
+                    {cate}
+                  </option>
+                ))}
+              </Select>
+              <Input
+                type="text"
+                name="description"
+                placeholder="내용작성"
+                value={value}
+                onChange={handleChange}
+              />
+              <Button title="저장" onClick={handleSubmit} />
+            </Flex>
+          </Container>
+          <Overlay />
+        </>
       )}
     </>,
     $portalRoot,
@@ -107,13 +97,23 @@ const Container = styled.div`
   border: 2px solid black;
   background-color: white;
   position: absolute;
-  top: 50px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+  z-index: 5;
+`;
+
+const Overlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const flexStyles = css`
