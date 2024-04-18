@@ -1,21 +1,17 @@
-import useModalLogin from "@/hooks/useModalLogin";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import Flex from "./Flex";
 
 const NavBar = () => {
-  const modalLogin = useModalLogin();
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    modalLogin.onOpen();
-  };
   return (
     <NavBarContainer>
       <Flex justify="space-between" align="center">
         <Link to="/">하자! 체크</Link>
         <div>
-          <Button title="로그인" onClick={handleClick} />
+          <Button title="로그인" onClick={() => navigate("/login")} />
           <Link to="/mypage">000님</Link>
         </div>
       </Flex>
