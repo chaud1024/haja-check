@@ -5,10 +5,19 @@ export interface Coordinate {
 
 export interface HajaItem {
   uid: string;
-  cate: string;
+  img: Image;
   description: string;
-  imgURL?: string;
   created_at: Date;
   updated_at: Date;
   coordinate: Coordinate;
+  house: {
+    uid: string;
+  };
+  index: string;
+}
+
+export interface Image {
+  uid: string;
+  original: string;
+  url: string; //uuid.png
 }
